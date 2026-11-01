@@ -1,0 +1,13 @@
+
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg[binary]
+alembic
+pydantic
+pydantic-settings
+python-multipart
+pymupdf
+google-genai
+supabase
+email-validator
