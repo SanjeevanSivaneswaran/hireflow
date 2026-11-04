@@ -1,0 +1,144 @@
+.candidate-edit-form {
+  background: #ffffff;
+  border: 1px solid #e4eae5;
+  border-radius: 11px;
+  padding: 26px;
+  margin-bottom: 20px;
+}
+
+.candidate-edit-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.candidate-edit-heading h2 {
+  font-size: 20px;
+  color: #20332c;
+  margin: 0 0 8px;
+}
+
+.candidate-edit-heading p {
+  color: #819087;
+  font-size: 13px;
+  margin: 0;
+}
+
+.candidate-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.candidate-edit-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #405749;
+}
+
+.candidate-edit-grid input,
+.candidate-edit-grid textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dce5de;
+  border-radius: 8px;
+  padding: 12px 13px;
+  background: white;
+  color: #293c30;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  outline: none;
+}
+
+.candidate-edit-grid input:focus,
+.candidate-edit-grid textarea:focus {
+  border-color: #6b9a7b;
+}
+
+.candidate-edit-grid textarea {
+  resize: vertical;
+}
+
+.candidate-edit-wide {
+  grid-column: 1 / -1;
+}
+
+.candidate-edit-grid small {
+  color: #819087;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.candidate-edit-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #edf0ed;
+}
+
+.candidate-edit-cancel,
+.candidate-edit-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.candidate-edit-cancel {
+  background: white;
+  border: 1px solid #dce5de;
+  color: #526c59;
+}
+
+.candidate-edit-save {
+  background: #285b48;
+  border: 1px solid #285b48;
+  color: white;
+}
+
+.candidate-edit-save:hover {
+  background: #204b3a;
+}
+
+.candidate-edit-cancel:disabled,
+.candidate-edit-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.candidate-edit-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background: #fff4f2;
+  border: 1px solid #f0cbc4;
+  border-radius: 7px;
+  color: #a43c2e;
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .candidate-edit-form {
+    padding: 18px;
+  }
+
+  .candidate-edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .candidate-edit-heading {
+    flex-direction: column;
+  }
+}

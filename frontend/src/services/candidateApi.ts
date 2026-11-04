@@ -1,4 +1,8 @@
 import type {
+  CandidateDraft,
+  CandidateProject,
+  Education,
+  WorkExperience, 
   ParsedResume,
   SaveCandidatePayload,
 } from "../types/candidate";
@@ -69,6 +73,15 @@ export interface CandidateSummary {
   updated_at: string;
 }
 
+export interface CandidateProfile extends CandidateSummary {
+  education: Education[];
+  work_experience: WorkExperience[];
+  projects: (CandidateProject & {
+    id: string;
+  })[];
+  resume_filename: string | null;
+}
+
 export async function getCandidates(
   search = "",
   page = 1,
@@ -95,12 +108,12 @@ export async function getCandidates(
 
 export async function getCandidateById(
   candidateId: string
-): Promise<CandidateSummary> {
+): Promise<CandidateProfile> {
   const response = await fetch(
     `${API_URL}/api/candidates/${candidateId}`
   );
 
-  return readResponse<CandidateSummary>(response);
+  return readResponse<CandidateProfile>(response);
 }
 
 export async function archiveCandidate(
@@ -127,4 +140,32 @@ export async function restoreCandidate(
   );
 
   return readResponse(response);
+}
+
+export interface UpdateCandidatePayload {
+  full_name?: string;
+  email?: string | null;
+  phone?: string | null;
+  location?: string | null;
+  professional_summary?: string | null;
+  experience_years?: number;
+  skills?: string[];
+}
+
+export async function updateCandidate(
+  candidateId: string,
+  candidateData: UpdateCandidatePayload
+): Promise<CandidateProfile> {
+  const response = await fetch(
+    `${API_URL}/api/candidates/${candidateId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(candidateData),
+    }
+  );
+
+  return readResponse<CandidateProfile>(response);
 }

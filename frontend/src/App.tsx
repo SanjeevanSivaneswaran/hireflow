@@ -3,6 +3,7 @@ import AppLayout from "./components/AppLayout";
 import OverviewPage from "./pages/OverviewPage";
 import CandidatesPage from "./pages/CandidatesPage";
 import CandidateUploadPage from "./pages/CandidateUploadPage";
+import CandidateProfilePage from "./pages/CandidateProfilePage";
 import "./App.css";
 
 type Page =
@@ -16,8 +17,13 @@ type Page =
 function App() {
   const [activePage, setActivePage] = useState<Page>("Overview");
   const [candidateView, setCandidateView] = useState<
-    "directory" | "upload"
+    "directory" | "upload" | "profile"
   >("directory");
+
+  const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(
+    null
+  );
+  
 
   function navigate(page: Page) {
     setActivePage(page);
@@ -41,12 +47,17 @@ function App() {
           <CandidateUploadPage
             onBack={() => setCandidateView("directory")}
           />
-        ) : (
+        ) : candidateView === "profile" && selectedCandidateId ? (
+          <CandidateProfilePage
+            candidateId={selectedCandidateId}
+            onBack={() => setCandidateView("directory")}
+          />
+        ) :  (
           <CandidatesPage
             onAddCandidate={openUpload}
             onViewCandidate={(candidateId) => {
-              // Candidate profile is implemented in Step 20.4.3.
-              window.alert(`Candidate profile: ${candidateId}`);
+              setSelectedCandidateId(candidateId);
+              setCandidateView("profile");
             }}
           />
         )
