@@ -87,7 +87,7 @@ def save_reviewed_candidate(
     # Separate projects from the main candidate information.
     candidate_fields = candidate_data.model_dump(
         exclude={"projects"},
-        mode="python"
+        mode="json"
     )
     candidate_fields["experience_years"] = candidate_data.experience_years
 
@@ -107,7 +107,6 @@ def save_reviewed_candidate(
         # Save candidate and projects in one transaction.
         db.add(new_candidate)
         db.commit()
-        db.refresh(new_candidate)
 
         # Load saved projects for the response.
         db.refresh(new_candidate)

@@ -54,3 +54,77 @@ export async function saveCandidate(
 
   return readResponse(response);
 }
+
+export interface CandidateSummary {
+  id: string;
+  full_name: string;
+  email: string | null;
+  phone: string | null;
+  location: string | null;
+  professional_summary: string | null;
+  experience_years: number;
+  skills: string[];
+  is_archived: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export async function getCandidates(
+  search = "",
+  page = 1,
+  includeArchived = false
+): Promise<CandidateSummary[]> {
+  const pageSize = 10;
+
+  const params = new URLSearchParams({
+    skip: String((page - 1) * pageSize),
+    limit: String(pageSize),
+    include_archived: String(includeArchived),
+  });
+
+  if (search.trim()) {
+    params.set("search", search.trim());
+  }
+
+  const response = await fetch(
+    `${API_URL}/api/candidates?${params.toString()}`
+  );
+
+  return readResponse<CandidateSummary[]>(response);
+}
+
+export async function getCandidateById(
+  candidateId: string
+): Promise<CandidateSummary> {
+  const response = await fetch(
+    `${API_URL}/api/candidates/${candidateId}`
+  );
+
+  return readResponse<CandidateSummary>(response);
+}
+
+export async function archiveCandidate(
+  candidateId: string
+): Promise<{ message: string; candidate_id: string }> {
+  const response = await fetch(
+    `${API_URL}/api/candidates/${candidateId}/archive`,
+    {
+      method: "PATCH",
+    }
+  );
+
+  return readResponse(response);
+}
+
+export async function restoreCandidate(
+  candidateId: string
+): Promise<{ message: string; candidate_id: string }> {
+  const response = await fetch(
+    `${API_URL}/api/candidates/${candidateId}/restore`,
+    {
+      method: "PATCH",
+    }
+  );
+
+  return readResponse(response);
+}
