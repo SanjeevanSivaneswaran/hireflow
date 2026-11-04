@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.database import engine
 from app.api.routes.jobs import router as jobs_router
 from app.api.routes.candidates import router as candidates_router
+from app.api.routes.resumes import router as resumes_router
 
 app = FastAPI(
     title="HireFlow API",
@@ -14,6 +15,7 @@ app = FastAPI(
 
 app.include_router(jobs_router)
 app.include_router(candidates_router)
+app.include_router(resumes_router)
 
 @app.get("/")
 def root():
