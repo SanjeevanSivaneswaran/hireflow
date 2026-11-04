@@ -74,7 +74,7 @@ class CandidateUpdate(BaseModel):
 class CandidateResponse(CandidateBase):
     model_config = ConfigDict(from_attributes=True)
 
-    id: str
+    id: UUID
     resume_filename: Optional[str] = None
     is_archived: bool
     created_at: datetime
