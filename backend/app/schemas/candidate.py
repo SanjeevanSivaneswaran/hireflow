@@ -80,3 +80,19 @@ class CandidateResponse(CandidateBase):
     created_at: datetime
     updated_at: datetime
     projects: list[CandidateProjectResponse] = Field(default_factory=list)
+
+
+
+class ReviewedCandidateCreate(CandidateCreate):
+    """
+    Candidate information reviewed and approved by the recruiter.
+    """
+
+    resume_filename: str = Field(
+        min_length=1,
+        max_length=255
+    )
+
+    resume_storage_path: str = Field(
+        min_length=1
+    )

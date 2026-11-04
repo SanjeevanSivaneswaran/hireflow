@@ -8,8 +8,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, selectinload
 
 from app.database import get_db
-from app.models.candidate import Candidate
-from app.schemas.candidate import CandidateUpdate, CandidateResponse
+from app.models.candidate import Candidate, CandidateProject
+from app.schemas.candidate import CandidateUpdate, CandidateResponse, ReviewedCandidateCreate
 
 
 router = APIRouter(
@@ -58,6 +58,68 @@ def get_candidates(
         .limit(limit)
         .all()
     )
+
+
+# Save a recuriter-reviewed candidate to the database
+@router.post(
+    "/from-resume",
+    response_model=CandidateResponse,
+    status_code=status.HTTP_201_CREATED
+)
+def save_reviewed_candidate(
+    candidate_data: ReviewedCandidateCreate,
+    db: Session = Depends(get_db)
+):
+    # Check whether this email already exists.
+    if candidate_data.email:
+        existing_candidate = (
+            db.query(Candidate)
+            .filter(Candidate.email == candidate_data.email)
+            .first()
+        )
+
+        if existing_candidate:
+            raise HTTPException(
+                status_code=409,
+                detail="A candidate with this email already exists."
+            )
+
+    # Separate projects from the main candidate information.
+    candidate_fields = candidate_data.model_dump(
+        exclude={"projects"},
+        mode="python"
+    )
+
+    project_data = candidate_data.projects
+
+    # Create the candidate.
+    new_candidate = Candidate(**candidate_fields)
+
+    # Add all reviewed projects.
+    for project in project_data:
+        new_project = CandidateProject(
+            **project.model_dump(mode="python")
+        )
+        new_candidate.projects.append(new_project)
+
+    try:
+        # Save candidate and projects in one transaction.
+        db.add(new_candidate)
+        db.commit()
+        db.refresh(new_candidate)
+
+        # Load saved projects for the response.
+        db.refresh(new_candidate)
+
+    except IntegrityError:
+        db.rollback()
+
+        raise HTTPException(
+            status_code=409,
+            detail="Could not save candidate. Check for duplicate email or invalid data."
+        )
+
+    return new_candidate
 
 
 # Get candidate by id
