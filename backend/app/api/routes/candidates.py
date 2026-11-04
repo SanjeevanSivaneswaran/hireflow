@@ -89,6 +89,7 @@ def save_reviewed_candidate(
         exclude={"projects"},
         mode="python"
     )
+    candidate_fields["experience_years"] = candidate_data.experience_years
 
     project_data = candidate_data.projects
 

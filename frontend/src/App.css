@@ -1,0 +1,149 @@
+.page-heading {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #668a7b;
+  margin: 0 0 12px;
+}
+
+.page-heading h1,
+.placeholder-page h1 {
+  font-size: clamp(27px, 3vw, 35px);
+  letter-spacing: -1.1px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #20332c;
+}
+
+.page-subtitle {
+  font-size: 15px;
+  color: #78857e;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.welcome-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 36px;
+  border-radius: 14px;
+  border: 1px solid #dfeae3;
+  background: #f0f6f1;
+}
+
+.welcome-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 13px;
+  background: white;
+  color: #315f4b;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.welcome-copy h2 {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  margin: 0 0 10px;
+}
+
+.welcome-copy p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #6b7b71;
+  max-width: 540px;
+  margin: 0 0 22px;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 0;
+  border-radius: 8px;
+  padding: 13px 19px;
+  background: #285b48;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: #1e4939;
+}
+
+.overview-section-heading {
+  margin: 38px 0 20px;
+}
+
+.overview-section-heading h2 {
+  font-size: 18px;
+  letter-spacing: -0.4px;
+  margin: 0 0 8px;
+}
+
+.overview-section-heading p {
+  font-size: 13px;
+  color: #89958e;
+  margin: 0;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.feature-card {
+  background: white;
+  border: 1px solid #e8ece9;
+  border-radius: 12px;
+  padding: 26px;
+}
+
+.feature-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 10px;
+  background: #f1f5f2;
+  color: #35624f;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 16px;
+  margin: 0 0 9px;
+}
+
+.feature-card p,
+.placeholder-page p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #849088;
+  margin: 0;
+}
+
+.placeholder-page {
+  padding-top: 16px;
+}
+
+@media (max-width: 650px) {
+  .welcome-panel {
+    padding: 24px;
+    flex-direction: column;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
