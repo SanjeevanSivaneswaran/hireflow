@@ -4,6 +4,9 @@ import OverviewPage from "./pages/OverviewPage";
 import CandidatesPage from "./pages/CandidatesPage";
 import CandidateUploadPage from "./pages/CandidateUploadPage";
 import CandidateProfilePage from "./pages/CandidateProfilePage";
+import JobsPage from "./pages/JobsPage";
+import JobCreatePage from "./pages/JobCreatePage";
+import JobDetailsPage from "./pages/JobDetailsPage";
 import "./App.css";
 
 type Page =
@@ -16,20 +19,28 @@ type Page =
 
 function App() {
   const [activePage, setActivePage] = useState<Page>("Overview");
+
   const [candidateView, setCandidateView] = useState<
     "directory" | "upload" | "profile"
   >("directory");
 
-  const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(
-    null
-  );
-  
+  const [selectedCandidateId, setSelectedCandidateId] = useState<
+    string | null
+  >(null);
+
+  const [jobView, setJobView] = useState<"directory" | "create" | "details">("directory");
+  const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
+  const [jobsRefreshKey, setJobsRefreshKey] = useState(0);
 
   function navigate(page: Page) {
     setActivePage(page);
 
     if (page === "Candidates") {
       setCandidateView("directory");
+    }
+
+    if (page === "Jobs") {
+      setJobView("directory");
     }
   }
 
@@ -52,12 +63,44 @@ function App() {
             candidateId={selectedCandidateId}
             onBack={() => setCandidateView("directory")}
           />
-        ) :  (
+        ) : (
           <CandidatesPage
             onAddCandidate={openUpload}
             onViewCandidate={(candidateId) => {
               setSelectedCandidateId(candidateId);
               setCandidateView("profile");
+            }}
+          />
+        )
+      ) : activePage === "Jobs" ? (
+        jobView === "create" ? (
+          <JobCreatePage
+            onBack={() => setJobView("directory")}
+            onCreated={() => {
+              setJobsRefreshKey((value) => value + 1);
+              setJobView("directory");
+            }}
+          />
+        ) : jobView === "details" && selectedJobId ? (
+          <JobDetailsPage
+            jobId={selectedJobId}
+            onBack={() => {
+              setJobsRefreshKey((value) => value + 1);
+              setJobView("directory");
+            }}
+            onDeleted={() => {
+              setSelectedJobId(null);
+              setJobsRefreshKey((value) => value + 1);
+              setJobView("directory");
+            }}
+          />
+        ) : (
+          <JobsPage
+            key={jobsRefreshKey}
+            onCreateJob={() => setJobView("create")}
+            onViewJob={(jobId) => {
+              setSelectedJobId(jobId);
+              setJobView("details");
             }}
           />
         )
