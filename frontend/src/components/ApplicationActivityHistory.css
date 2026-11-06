@@ -1,0 +1,144 @@
+.application-history-card {
+  padding: 27px;
+  margin-bottom: 20px;
+  border: 1px solid #e5eae5;
+  border-radius: 13px;
+  background: #ffffff;
+}
+
+.application-history-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: #285b48;
+}
+
+.application-history-heading h2 {
+  margin: 0;
+  color: #26352f;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.application-history-description {
+  margin: 0 0 25px;
+  color: #758078;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.application-history-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.application-history-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 28px;
+}
+
+.application-history-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 31px;
+  bottom: 0;
+  left: 15px;
+  width: 1px;
+  background: #e0e8e1;
+}
+
+.application-history-item:last-child {
+  padding-bottom: 0;
+}
+
+.application-history-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 31px;
+  height: 31px;
+  border: 1px solid #d8e7dd;
+  border-radius: 50%;
+  background: #eff7f1;
+  color: #285b48;
+}
+
+.application-history-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 5px;
+}
+
+.application-history-content h3 {
+  margin: 0 0 9px;
+  color: #34473b;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.application-history-content p {
+  margin: 0 0 11px;
+  color: #758078;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.application-history-transition {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 12px;
+  color: #758078;
+  font-size: 12px;
+}
+
+.application-history-new-status {
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #e9f3ed;
+  color: #285b48;
+  font-weight: 650;
+}
+
+.application-history-date {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #95a098;
+  font-size: 11px;
+}
+
+.application-history-error {
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #f0cfcc;
+  border-radius: 8px;
+  background: #fff5f4;
+  color: #a34c45;
+  font-size: 13px;
+}
+
+.application-history-empty {
+  padding: 20px;
+  border: 1px dashed #dce4dd;
+  border-radius: 9px;
+  color: #8b968e;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .application-history-card {
+    padding: 22px 18px;
+  }
+}

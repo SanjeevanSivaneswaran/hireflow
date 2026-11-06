@@ -1,0 +1,163 @@
+.application-notes-card {
+  padding: 27px;
+  margin-bottom: 20px;
+  border: 1px solid #e5eae5;
+  border-radius: 13px;
+  background: #ffffff;
+}
+
+.application-notes-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: #285b48;
+}
+
+.application-notes-heading h2 {
+  margin: 0;
+  color: #26352f;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.application-notes-description {
+  margin: 0 0 22px;
+  color: #758078;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.application-notes-form {
+  padding: 20px;
+  border: 1px solid #e2eae4;
+  border-radius: 10px;
+  background: #f8faf8;
+}
+
+.application-notes-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #34473b;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.application-notes-form textarea {
+  width: 100%;
+  min-height: 110px;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #dce4dd;
+  border-radius: 8px;
+  background: white;
+  color: #26352f;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.application-notes-form textarea:focus {
+  outline: none;
+  border-color: #285b48;
+  box-shadow: 0 0 0 3px rgba(40, 91, 72, 0.1);
+}
+
+.application-notes-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.application-notes-form-footer span {
+  color: #8b968e;
+  font-size: 11px;
+}
+
+.application-notes-form-footer button {
+  padding: 11px 19px;
+  border: none;
+  border-radius: 8px;
+  background: #285b48;
+  color: white;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.application-notes-form-footer button:hover:not(:disabled) {
+  background: #1e4939;
+}
+
+.application-notes-form-footer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.application-notes-error {
+  padding: 12px 14px;
+  margin-top: 16px;
+  border: 1px solid #f0cfcc;
+  border-radius: 8px;
+  background: #fff5f4;
+  color: #a34c45;
+  font-size: 13px;
+}
+
+.application-notes-list {
+  margin-top: 25px;
+}
+
+.application-notes-list h3 {
+  margin: 0 0 15px;
+  color: #34473b;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.application-notes-item {
+  padding: 17px;
+  margin-bottom: 12px;
+  border: 1px solid #e7ece7;
+  border-radius: 9px;
+  background: white;
+}
+
+.application-notes-item p {
+  margin: 0 0 14px;
+  color: #3d4f42;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.application-notes-date {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #8b968e;
+  font-size: 11px;
+}
+
+.application-notes-empty {
+  padding: 20px;
+  border: 1px dashed #dce4dd;
+  border-radius: 9px;
+  color: #8b968e;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .application-notes-card {
+    padding: 22px 18px;
+  }
+
+  .application-notes-form {
+    padding: 15px;
+  }
+}

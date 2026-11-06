@@ -7,6 +7,9 @@ import CandidateProfilePage from "./pages/CandidateProfilePage";
 import JobsPage from "./pages/JobsPage";
 import JobCreatePage from "./pages/JobCreatePage";
 import JobDetailsPage from "./pages/JobDetailsPage";
+import ApplicationsPage from "./pages/ApplicationPage";
+import ApplicationCreatePage from "./pages/ApplicationCreatePage";
+import ApplicationDetailsPage from "./pages/ApplicationDetailsPage";
 import "./App.css";
 
 type Page =
@@ -32,6 +35,15 @@ function App() {
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
   const [jobsRefreshKey, setJobsRefreshKey] = useState(0);
 
+  const [applicationView, setApplicationView] = useState<
+    "directory" | "create" | "details"
+  >("directory");
+
+  const [selectedApplicationId, setSelectedApplicationId] =
+    useState<string | null>(null);
+
+  const [applicationsRefreshKey, setApplicationsRefreshKey] = useState(0);
+
   function navigate(page: Page) {
     setActivePage(page);
 
@@ -41,6 +53,10 @@ function App() {
 
     if (page === "Jobs") {
       setJobView("directory");
+    }
+
+    if (page === "Applications") {
+      setApplicationView("directory");
     }
   }
 
@@ -101,6 +117,36 @@ function App() {
             onViewJob={(jobId) => {
               setSelectedJobId(jobId);
               setJobView("details");
+            }}
+          />
+        )
+
+      ) : activePage === "Applications" ? (
+        applicationView === "create" ? (
+          <ApplicationCreatePage
+            onBack={() => setApplicationView("directory")}
+            onCreated={() => {
+              setApplicationsRefreshKey((value) => value + 1);
+              setApplicationView("directory");
+            }}
+          />
+        ) : applicationView === "details" && selectedApplicationId ? (
+          <ApplicationDetailsPage
+            applicationId={selectedApplicationId}
+            onBack={() => {
+              setApplicationsRefreshKey((value) => value + 1);
+              setApplicationView("directory");
+            }}
+          />
+        ) : (
+          <ApplicationsPage
+            key={applicationsRefreshKey}
+            onCreateApplication={() => {
+              setApplicationView("create");
+            }}
+            onViewApplication={(applicationId) => {
+              setSelectedApplicationId(applicationId);
+              setApplicationView("details");
             }}
           />
         )
